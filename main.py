@@ -20,8 +20,20 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    
-    return render_template("index.html")
+    school_name = os.getenv('SCHOOL_NAME')
+    city = os.getenv('CITY')
+    weather = get_current_weather()
+
+    desc = weather['weather'][0]['description'].capitalize()
+    temperature = f'{weather['main']['temp']:.1f}°C'
+    feels_like = f'{weather['main']['feels_like']:.1f}°C'
+
+    return render_template("index.html",
+                           school_name = school_name,
+                           city=city,
+                           desc = desc,
+                           temp=temperature,
+                           feels_like=feels_like)
 
 
 
