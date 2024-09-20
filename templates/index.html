@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link href="{{url_for('static', filename='styles/style.css')}}"
+    rel="stylesheet" />
+</head>
+<body>
+    <h1>School Management System</h1>
+    <h2>{{school_name}}</h2>
+    <div>{{city}}, </div>
+    <h1>Get Room</h1>
+    <form action="/room">
+        <input type="text" 
+            name="roomName" 
+            id="roomName"
+            placeholder="Key in Room Name" />
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
