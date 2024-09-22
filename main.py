@@ -39,18 +39,21 @@ def index():
 
 @app.route('/chart')
 def chart():
-    str_input = request.args.get('x_value')
+    str_input = request.args.get('n')
     if(str_input == None or len(str_input) < 1):
         str_input = 1
-    x_value = float(str_input)
-    print(x_value)
+    N = float(str_input)
+    print(N)
     
-    ypoints = []
-    arr_values = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
-    for val in arr_values:
-        ypoints.append(np.exp(val*x_value))
-        
-    plt.plot(ypoints)
+    
+    x = np.array([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+    y = np.exp(N * x)
+
+    plt.plot(x, y)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title('y = e^(Nx)')
+
     #plt.show()
 
     #render as image file
@@ -64,7 +67,7 @@ def chart():
     fig_png_data = base64.b64encode(fig.getvalue()).decode('utf-8')
     chart_b64 = f"data:image/png;base64,{fig_png_data}"
     plt.close()
-    return render_template("chart.html", x_value=x_value, chart_b64=chart_b64)
+    return render_template("chart.html", n=N, chart_b64=chart_b64)
 
 # def fig_to_base64(fig):
 #     img = io.BytesIO()
